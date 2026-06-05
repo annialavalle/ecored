@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EcoRed Comunitaria: conectando productores rurales mexicanos con consumidores urbanos a través de una cadena de distribución inclusiva, justa y trazable." />
+  <title>EcoRed Comunitaria — Del campo a tu mesa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:    #1B4332;
+      --mid:     #2D6A4F;
+      --leaf:    #40916C;
+      --mint:    #74C69D;
+      --pale:    #D8F3DC;
+      --cream:   #F9F8F6;
+      --white:   #FFFFFF;
+      --charcoal:#2B2D42;
+      --gray:    #6B7280;
+      --lg:      #E5E7EB;
+      --focus:   #FFD700;
+      /* ── Amber accent ── */
+      --amber:      #C8860A;
+      --amber-light:#F5C842;
+      --amber-pale: #FEF3D0;
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', Arial, sans-serif;
+    }
+
+    /* ── Accessibility: focus ring ──────────────────────── */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    /* ── Skip link ──────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 1rem;
+      background: var(--focus);
+      color: var(--charcoal);
+      padding: 0.6rem 1.2rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      border-radius: 4px;
+      z-index: 9999;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── Base ──────────────────────────────────────────── */
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--cream);
+      line-height: 1.65;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+      gap: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+    .nav-logo span { color: var(--mint); }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--pale);
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 500;
+      padding: 0.3rem 0.1rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color .2s, color .2s;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--mint);
+      border-bottom-color: var(--mint);
+    }
+    /* High-contrast text size toggle */
+    .a11y-bar {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .a11y-btn {
+      background: transparent;
+      border: 1px solid var(--mint);
+      color: var(--mint);
+      border-radius: 4px;
+      padding: .25rem .55rem;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background .2s;
+    }
+    .a11y-btn:hover, .a11y-btn:focus-visible {
+      background: var(--mint);
+      color: var(--dark);
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--mid) 100%);
+      color: var(--white);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 65% at 80% 20%, rgba(200,134,10,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--white);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      max-width: 780px;
+      margin: 0 auto 1.2rem;
+      color: var(--white);
+    }
+    .hero h1 span { color: var(--amber-light); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--pale);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--mint);
+      color: var(--dark);
+      font-weight: 700;
+      font-family: var(--font-body);
+      padding: .85rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background: var(--pale);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+      font-weight: 600;
+      font-family: var(--font-body);
+      padding: .8rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-left: 1rem;
+      transition: background .2s;
+    }
+    .btn-secondary:hover, .btn-secondary:focus-visible {
+      background: rgba(255,255,255,.12);
+    }
+    .btn-register {
+      display: inline-block;
+      background: var(--mint);
+      color: var(--dark);
+      border: none;
+      font-weight: 700;
+      font-family: var(--font-body);
+      padding: .85rem 2.2rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-register:hover, .btn-register:focus-visible {
+      background: var(--pale);
+      transform: translateY(-2px);
+    }
+
+    /* ── STATS ────────────────────────────────────────── */
+    .stats {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0;
+      border-bottom: 1px solid var(--lg);
+    }
+    .stat {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid var(--lg);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2.4rem;
+      color: var(--amber);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .85rem;
+      color: var(--gray);
+      margin-top: .4rem;
+    }
+
+    /* ── SECTIONS ─────────────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      margin-bottom: .6rem;
+    }
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROBLEMA ─────────────────────────────────────── */
+    #problema { background: var(--cream); }
+    #problema .section-tag { color: var(--amber); }
+    #impacto .section-tag { color: var(--amber); }
+    #unirse .section-tag { color: var(--amber-light); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .problem-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 2rem;
+      border-left: 4px solid var(--amber);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .problem-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-bottom: .7rem;
+    }
+    .problem-icon {
+      width: 3rem;
+      height: 3rem;
+      background: var(--amber-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    /* ── CÓMO FUNCIONA ────────────────────────────────── */
+    #como { background: var(--dark); color: var(--white); }
+    #como h2, #como .section-tag { color: var(--mint); }
+    #como .section-lead { color: var(--pale); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .step-num {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: var(--leaf);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin: 0 auto 1rem;
+    }
+    .step h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--mint);
+      margin-bottom: .5rem;
+    }
+    .step p { font-size: .95rem; color: var(--pale); }
+
+    /* ── PROMESA DE VALOR ─────────────────────────────── */
+    #promesa { background: var(--white); }
+    .valor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 640px) { .valor-grid { grid-template-columns: 1fr; } }
+    .valor-card {
+      padding: 2rem;
+      border-radius: 6px;
+    }
+    .valor-card.productores { background: var(--pale); }
+    .valor-card.consumidores { background: var(--dark); color: var(--white); }
+    .valor-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .valor-card.consumidores h3 { color: var(--mint); }
+    .valor-card ul { list-style: none; }
+    .valor-card li {
+      padding: .4rem 0;
+      padding-left: 1.4rem;
+      position: relative;
+      font-size: .97rem;
+    }
+    .valor-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--leaf);
+      font-weight: 700;
+    }
+    .valor-card.consumidores li::before { color: var(--mint); }
+
+    /* ── IMPACTO ──────────────────────────────────────── */
+    #impacto { background: var(--amber-pale); }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .impact-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    }
+    .impact-card .big-num {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      color: var(--amber);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .impact-card p { font-size: .9rem; color: var(--gray); margin-top: .5rem; }
+
+    /* ── UNIRSE ───────────────────────────────────────── */
+    #unirse { background: var(--dark); color: var(--white); text-align: center; }
+    #unirse h2 { color: var(--white); }
+    #unirse .section-lead { color: var(--pale); max-width: 600px; margin: 0 auto 2.5rem; }
+    .join-form {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .join-form label {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+    .join-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: .85rem 1.2rem;
+      border: 2px solid var(--mint);
+      border-radius: 4px;
+      background: rgba(255,255,255,.1);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+    .join-form input[type="email"]::placeholder { color: var(--pale); }
+    .join-form input[type="email"]:focus-visible {
+      outline: 3px solid var(--focus);
+      background: rgba(255,255,255,.18);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: var(--pale);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: .88rem;
+    }
+    footer a { color: var(--mint); }
+
+    /* ── Accessibility: reduced motion ───────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    /* ── High-contrast mode ──────────────────────────── */
+    body.high-contrast {
+      --dark:   #000000;
+      --amber:  #8B6000;
+      --amber-light: #D4A017;
+      --amber-pale: #FFF3CC;
+      --mid:    #003300;
+      --leaf:   #006600;
+      --mint:   #00CC66;
+      --pale:   #CCFFCC;
+      --cream:  #FFFFFF;
+      --charcoal:#000000;
+      filter: contrast(1.4);
+    }
+    /* ── Large-text mode ─────────────────────────────── */
+    body.large-text { font-size: 19px; }
+  </style>
+</head>
+<body>
+
+  <!-- Skip navigation: Perceptible & Operable -->
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav role="navigation" aria-label="Navegación principal">
+    <a href="#main-content" class="nav-logo" aria-label="EcoRed Comunitaria — Inicio">Eco<span>Red</span></a>
+    <ul class="nav-links">
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#como">Cómo funciona</a></li>
+      <li><a href="#promesa">Propuesta</a></li>
+      <li><a href="#impacto">Impacto</a></li>
+      <li><a href="#unirse">Únete</a></li>
+    </ul>
+    <!-- Accessibility controls (Understandable + Operable) -->
+    <div class="a11y-bar" role="group" aria-label="Opciones de accesibilidad">
+      <button class="a11y-btn" id="btn-hc" aria-pressed="false" title="Activar alto contraste">A+C</button>
+      <button class="a11y-btn" id="btn-lt" aria-pressed="false" title="Ampliar texto">A+</button>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ────────────────────────────────────────── -->
+  <main id="main-content">
+
+    <!-- HERO -->
+    <header class="hero" role="banner">
+      <p class="hero-tag" aria-hidden="true">Modelo de negocio inclusivo</p>
+      <h1>Del <span>campo</span> a tu mesa,<br/>sin intermediarios</h1>
+      <p>Conectamos productores rurales mexicanos con consumidores urbanos a través de una red de distribución justa, fresca y 100 % trazable.</p>
+      <nav aria-label="Acciones principales">
+        <a href="#unirse" class="btn-primary">Quiero unirme</a>
+        <a href="#como" class="btn-secondary">Cómo funciona</a>
+      </nav>
+    </header>
+
+    <!-- STATS -->
+    <section aria-label="Cifras clave" class="stats">
+      <div class="stat">
+        <div class="stat-num" aria-label="3.5 millones">3.5M</div>
+        <div class="stat-label">productores rurales en México</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">pérdida postcosecha evitable</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+60%</div>
+        <div class="stat-label">aumento en ingreso productor</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">intermediarios en la cadena</div>
+      </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section id="problema" aria-labelledby="h2-problema">
+      <div class="container">
+        <p class="section-tag">El desafío</p>
+        <h2 id="h2-problema">Un sistema roto que excluye a quienes más producen</h2>
+        <p class="section-lead">Millones de familias campesinas trabajan la tierra sin acceder a precios justos. EcoRed existe para cambiar eso.</p>
+        <div class="problem-grid" role="list">
+          <article class="problem-card" role="listitem">
+            <div class="problem-icon" aria-hidden="true">🌱</div>
+            <h3>Intermediarios abusivos</h3>
+            <p>Los productores reciben apenas el 15-20 % del precio final. El resto se queda en manos de intermediarios que no añaden valor real al producto.</p>
+          </article>
+          <article class="problem-card" role="listitem">
+            <div class="problem-icon" aria-hidden="true">📦</div>
+            <h3>Pérdidas postcosecha</h3>
+            <p>Hasta el 40 % de la producción se desperdicia por falta de logística eficiente. Alimento que podría llegar a mesas urbanas se pierde en el camino.</p>
+          </article>
+          <article class="problem-card" role="listitem">
+            <div class="problem-icon" aria-hidden="true">🏘️</div>
+            <h3>Exclusión digital</h3>
+            <p>Sin acceso a tecnología ni redes comerciales, las comunidades rurales quedan fuera de la economía formal y los mercados premium.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como" aria-labelledby="h2-como">
+      <div class="container">
+        <p class="section-tag">El proceso</p>
+        <h2 id="h2-como">Cuatro pasos, un sistema justo</h2>
+        <p class="section-lead">EcoRed opera con logística propia y tecnología accesible para garantizar que cada producto llegue fresco y con trazabilidad completa.</p>
+        <ol class="steps" aria-label="Pasos del proceso">
+          <li class="step">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>Productor cosecha</h3>
+            <p>El productor registra su cosecha en la app EcoRed. Sin papeles, sin complicaciones.</p>
+          </li>
+          <li class="step">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>EcoRed recoge</h3>
+            <p>Nuestras camionetas llegan a la parcela, reduciendo la carga logística al cero.</p>
+          </li>
+          <li class="step">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>Certificamos</h3>
+            <p>Verificamos calidad y trazabilidad. El consumidor sabe exactamente quién cultivó su alimento.</p>
+          </li>
+          <li class="step">
+            <div class="step-num" aria-hidden="true">4</div>
+            <h3>Entrega directa</h3>
+            <p>El consumidor recibe en puntos de entrega o a domicilio. Fresco, justo, trazable.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PROPUESTA DE VALOR -->
+    <section id="promesa" aria-labelledby="h2-promesa">
+      <div class="container">
+        <p class="section-tag">Propuesta de valor</p>
+        <h2 id="h2-promesa">"Llevamos el campo a tu mesa:<br/>productos frescos, trazables y justamente pagados."</h2>
+        <p class="section-lead">Dos grupos se benefician directamente de EcoRed.</p>
+        <div class="valor-grid">
+          <div class="valor-card productores">
+            <h3>Para productores rurales</h3>
+            <ul>
+              <li>Precio justo garantizado (+60 % vs intermediario)</li>
+              <li>Acceso a mercado sin comisiones abusivas</li>
+              <li>Capacitación y certificación gratuita</li>
+              <li>Pago puntual en menos de 48 h</li>
+            </ul>
+          </div>
+          <div class="valor-card consumidores">
+            <h3>Para consumidores urbanos</h3>
+            <ul>
+              <li>Producto 100 % fresco y trazable</li>
+              <li>Precio competitivo vs supermercado</li>
+              <li>Suscripción flexible desde $350 MXN/semana</li>
+              <li>Impacto social medible con cada compra</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACTO -->
+    <section id="impacto" aria-labelledby="h2-impacto">
+      <div class="container">
+        <p class="section-tag">Escalabilidad</p>
+        <h2 id="h2-impacto">Crecemos para ayudar a más personas</h2>
+        <p class="section-lead">En 5 años, EcoRed proyecta impactar directamente a miles de familias en todo México.</p>
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="big-num">1,000</div>
+            <p>familias productoras con ingresos dignos al año 5</p>
+          </div>
+          <div class="impact-card">
+            <div class="big-num">30,000</div>
+            <p>consumidores con acceso a alimentos trazables</p>
+          </div>
+          <div class="impact-card">
+            <div class="big-num">10</div>
+            <p>estados de la República con operación activa</p>
+          </div>
+          <div class="impact-card">
+            <div class="big-num">0 %</div>
+            <p>desperdicio gracias a logística planificada</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÚNETE -->
+    <section id="unirse" aria-labelledby="h2-unirse">
+      <div class="container">
+        <p class="section-tag" style="color:var(--mint)">Únete a EcoRed</p>
+        <h2 id="h2-unirse">Sé parte del cambio</h2>
+        <p class="section-lead">Regístrate y sé de los primeros en recibir una canasta EcoRed o en incorporarte como productor.</p>
+        <form class="join-form" action="#" method="post" aria-label="Formulario de registro">
+          <label for="email-input">Tu correo electrónico</label>
+          <input
+            type="email"
+            id="email-input"
+            name="email"
+            placeholder="tucorreo@ejemplo.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-describedby="email-hint"
+          />
+          <span id="email-hint" style="display:none">Ingresa un correo válido para registrarte</span>
+          <button type="submit" class="btn-register">Registrarme</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <p><strong>EcoRed Comunitaria</strong> — Modelo de Negocio Inclusivo · 2025</p>
+    <p style="margin-top:.5rem">Diseñado con accesibilidad POUR · <a href="#main-content">Volver al inicio</a></p>
+  </footer>
+
+  <script>
+    // Accessibility toggles
+    const btnHC = document.getElementById('btn-hc');
+    const btnLT = document.getElementById('btn-lt');
+
+    btnHC.addEventListener('click', () => {
+      const on = document.body.classList.toggle('high-contrast');
+      btnHC.setAttribute('aria-pressed', String(on));
+    });
+    btnLT.addEventListener('click', () => {
+      const on = document.body.classList.toggle('large-text');
+      btnLT.setAttribute('aria-pressed', String(on));
+    });
+  </script>
+</body>
+</html>
